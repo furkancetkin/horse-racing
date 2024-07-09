@@ -2,7 +2,10 @@
   <div class="header">
     <h3>Horse Racing</h3>
     <div class="buttons">
-      <button @click="generateProgram">Generate Program</button>
+      <button
+      @click="generateProgram"
+      :disabled="getRaceStatus === 'running'"
+      >Generate Program</button>
       <button @click="startRace">Start</button>
     </div>
   </div>
@@ -10,12 +13,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default defineComponent({
   name: 'Header',
   methods: {
     ...mapActions(['generateProgram', 'startRace']),
+  },
+  computed: {
+    ...mapGetters(['getRaceStatus']),
   },
 });
 </script>
